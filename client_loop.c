@@ -25,13 +25,13 @@ int				ret;
 
 	FD_ZERO(t_client.fd_read);
 	FD_ZERO(t_client.fd_write);
-	FD_COPY(CLIENT_ACTIVE, CLIENT_READ);
-	FD_COPY(CLIENT_ACTIVE, CLIENT_WRITE);
+	//FD_COPY(CLIENT_ACTIVE, CLIENT_READ);
+	//FD_COPY(CLIENT_ACTIVE, CLIENT_WRITE);
 	timeout.tv_sec = 0;
 	timeout.tv_usec = 50;
 	ret = select(client()->fd + 1, CLIENT_READ, CLIENT_WRITE, NULL, &timeout);
 	if (ret < 0)
-		return ((void)perr("Select encountered an error.\n"));
+		error(-1, "Select encountered an error.\n");
 	if (FD_ISSET(0, CLIENT_READ))
 		client()->cl_read = client_read(0, client()->cl_read);
 	if (FD_ISSET(client()->fd, CLIENT_READ) && client()->fd > 0)
