@@ -50,6 +50,8 @@ typedef struct  s_env{
 
 
 typedef  struct s_client {
+    fd_set	fd_read;
+    fd_set	fd_write;
     int fd;
     char *str;
 }               t_client;
